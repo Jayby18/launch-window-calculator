@@ -39,6 +39,7 @@ let Mars = new PlanetaryBody(
 )
 
 const GM = 1.327124 * (10 ** 20)
+const aVelMars = 0.5240
 
 function timeOfFlight(ra, rb, atf) {
     let atfMeters = atf * 149.597870 * (10 ** 9)
@@ -65,6 +66,7 @@ function calcForm() {
         r2 = parseFloat(r2)
     }
 
+    // Check if user specified a semi-major axis, if not set it to the mean of the two radii
     if(atx != null && atx != "")
     {
         atx = parseFloat(atx)
@@ -75,6 +77,7 @@ function calcForm() {
         atx = (r1 + r2) / 2
     }
 
+    // Calculate time of flight (tof) using function above
     var tof = timeOfFlight(r1, r2, atx)
     console.log("TOF= " + tof)
     if (!isNaN(tof)) {
@@ -83,12 +86,18 @@ function calcForm() {
         document.getElementById("tof-text").innerHTML = ""
     }
 
+    // Calculate phase angle using simple formula from KSP forum
     phaseAngle = angleTraversed * (1 - ((r1 + r2) / (2 * r2)) ** 1.5)
-    console.log(phaseAngle)
+    console.log("Phase1: " + phaseAngle)
+
+    // Calculate phase angle using more complex formula from braeunig.us
+    phaseAngle_alt = angleTraversed - aVelMars * (tof / 86400)
+    console.log(angleTraversed)
+    console.log("Phase2: " + phaseAngle_alt)
 
     if (!isNaN(phaseAngle)) {
         document.getElementById("js_output").innerHTML =
-            "Phase Angle: " + phaseAngle + "°"
+            "Phase Angle: " + phaseAngle_alt + "\xB0"
     } else {
         alert("Invalid inputs. Please try again.")
     }
