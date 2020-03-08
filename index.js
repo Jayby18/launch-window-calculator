@@ -38,12 +38,23 @@ let Mars = new PlanetaryBody(
     3389500
 )
 
+const GM = 1.327124 * (10 ** 20)
+
+function timeOfFlight(ra, rb, atf) {
+    let atfMeters = atf * 149.597870 * (10 ** 9)
+    let e = 1 - (ra / atf)
+    let v = Math.acos((atf * (1 - e ** 2) / rb - 1)/ e)
+    let E = Math.acos((e + Math.cos(v)) / (1 + e * Math.cos(v)))
+    let TOF = (E - e * Math.sin(E)) * Math.sqrt((atfMeters ** 3)/ GM)
+    return TOF
+}
+
 function calcForm() {
     var angleTraversed = 180
 
     var r1 = document.getElementById("inputRadius1").value
     var r2 = document.getElementById("inputRadius2").value
-    var atx = document.getElementById("inputTransferOrbit").value
+    atx = document.getElementById("inputTransferOrbit").value
 
     if(r1 == null || r1 == "" || r2 == null || r2 == "")
     {
@@ -60,6 +71,16 @@ function calcForm() {
         var transferEcc = 1 - (r1 / atx)
         angleTraversed = (Math.acos((atx * (1 - transferEcc ** 2) / r2 - 1) / transferEcc)) * (180 / Math.PI)
         console.log(angleTraversed)
+    } else {
+        atx = (r1 + r2) / 2
+    }
+
+    var tof = timeOfFlight(r1, r2, atx)
+    console.log("TOF= " + tof)
+    if (!isNaN(tof)) {
+        document.getElementById("tof-text").innerHTML = "TOF: " + tof / 86400 + " days"
+    } else {
+        document.getElementById("tof-text").innerHTML = ""
     }
 
     phaseAngle = angleTraversed * (1 - ((r1 + r2) / (2 * r2)) ** 1.5)
