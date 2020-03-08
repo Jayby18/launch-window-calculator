@@ -4,48 +4,6 @@
         <title>Launch Window Calculator</title>
         <link rel="stylesheet" type="text/css" href="style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" content="height=device-height">
-		<script>
-		    function toDeg (radians) {
-		        return (radians * (180 / Math.PI))
-		    }
-		    
-		    function calcComplex () {
-    		    var r1 = 1.000
-    		    var r2 = 1.524
-    		    var GM = 1.327124 * (10 ** 20)
-    		    
-    		    var atx = (r1 + r2) / 2
-    		    var atxMeters = atx * 149.597870 * (10 ** 9)
-    		    console.log(atxMeters)
-    		    
-    		    var e = 1 - (r1 / atx)
-    		    var v = Math.acos((atx * (1 - e ** 2) / r2 - 1) / e)
-    		    var v2 = Math.acos((1.3 * (1 - 0.230769 ** 2) / r2 - 1) / 0.230769)
-    		    
-    		    var v_deg = v * (180 / Math.PI)
-    		    var v2_deg = v2 * (180 / Math.PI)
-    		    
-    		    var E = Math.acos((e + Math.cos(v)) / (1 + e * Math.cos(v)))
-    		    console.log(E)
-    		    var E2 = Math.acos((e + Math.cos(v2)) / (1 + e * Math.cos(v2)))
-    		    console.log(E2)
-    		    
-    		    console.log("")
-    		    console.log("Sine(E)=" + Math.sin(E))
-    		    console.log("Sine(E)=" + Math.sin(toDeg(E)))
-    		    console.log("")
-    		    
-    		    var TOF = E - e * Math.sin(E) * Math.sqrt((atxMeters ** 3) / GM)
-    		    console.log(TOF)
-    		    var TOF2 = E2 - e * Math.sin(E2) * Math.sqrt(((1.3 * 149.597870 * (10 ** 9)) ** 3) / GM)
-    		    console.log(TOF2)
-    		    
-    		    phaseAngle = 180 * (1 - (((r1 + r2) / (2 * r2)) ** 1.5))
-    		    console.log(phaseAngle)
-    		    
-    		    document.getElementById("js_output").innerHTML = phaseAngle
-		    }
-        </script>
         <script src="index.js"></script>
 
         <!-- BOOTSTRAP REQUIREMENTS -->
