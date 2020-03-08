@@ -41,6 +41,15 @@ let Mars = new PlanetaryBody(
 const GM = 1.327124 * (10 ** 20)
 const aVelMars = 0.5240
 
+function deltaVelocity(ra, rb, atx) {
+    let velInitA = Math.sqrt(GM / ra)
+    let velFinalB = Math.sqrt(GM / rb)
+    let deltaVa = Math.sqrt(GM * (2 / ra - 1 / atx)) - velInitA
+    let deltaVb = Math.sqrt(GM * (2 / rb - 1 / atx)) - velFinalB
+    let totalDeltaV = deltaVa + deltaVb
+    return totalDeltaV
+}
+
 function timeOfFlight(ra, rb, atf) {
     let atfMeters = atf * 149.597870 * (10 ** 9)
     let e = 1 - (ra / atf)
@@ -73,6 +82,7 @@ function calcForm() {
         var transferEcc = 1 - (r1 / atx)
         angleTraversed = (Math.acos((atx * (1 - transferEcc ** 2) / r2 - 1) / transferEcc)) * (180 / Math.PI)
         console.log(angleTraversed)
+        console.log("deltaV = " + deltaVelocity(r1, r2, atx))
     } else {
         atx = (r1 + r2) / 2
     }
