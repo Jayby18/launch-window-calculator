@@ -1,0 +1,23 @@
+{
+  "name": "launch_window_web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jayby18/launch_window_calculator.git"
+  },
+  "author": "Jaden Accord",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jayby18/launch_window_calculator/issues"
+  },
+  "homepage": "https://github.com/Jayby18/launch_window_calculator#readme",
+  "dependencies": {
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0"
+  }
+}
