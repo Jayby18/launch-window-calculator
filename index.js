@@ -59,12 +59,14 @@ function timeOfFlight(ra, rb, atf) {
     return TOF
 }
 
-function calcForm() {
+function calcForm(r1, r2, atx) {
     var angleTraversed = 180
 
-    var r1 = document.getElementById("inputRadius1").value
-    var r2 = document.getElementById("inputRadius2").value
-    atx = document.getElementById("inputTransferOrbit").value
+    if(r1 == null || r1 == "" || r2 == null || r2 == "") {
+        r1 = document.getElementById("inputRadius1").value
+        r2 = document.getElementById("inputRadius2").value
+        atx = document.getElementById("inputTransferOrbit").value
+    }
 
     if(r1 == null || r1 == "" || r2 == null || r2 == "")
     {
@@ -101,7 +103,7 @@ function calcForm() {
     console.log("Phase1: " + phaseAngle)
 
     // Calculate phase angle using more complex formula from braeunig.us
-        phaseAngle_alt = angleTraversed - aVelMars * (tof / 86400)
+    phaseAngle_alt = angleTraversed - aVelMars * (tof / 86400)
     console.log(angleTraversed)
     console.log("Phase2: " + phaseAngle_alt)
 
@@ -114,9 +116,13 @@ function calcForm() {
 }
 
 function handleInputChange() {
-    /* if(document.getElementById("inputRadius1").value != null && document.getElementById("inputRadius1").value != "" && document.getElementById("inputRadius2").value != null && document.getElementById("inputRadius2").value != "") {
+    if(document.getElementById("inputRadius1").value != null && document.getElementById("inputRadius1").value != "" && document.getElementById("inputRadius2").value != null && document.getElementById("inputRadius2").value != "") {
         calcForm()
     } else {
         console.log("Inputs still empty")
-    } */
+    }
+}
+
+module.exports = {
+    calcPhaseAngle: calcForm()
 }
