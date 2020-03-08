@@ -12,6 +12,27 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+code {
+  text-align: left !important;
+  display: inline-block;
+  font-family: monospace;
+  color: black !important;
+  white-space: pre-line;
+  white-space: pre-wrap;
+}
+
+#back-button {
+  position: sticky;
+  top: 0;
+  width: 5%;
+  border-radius: 0.1rem;
+}
+
+.code-container {
+  margin-left: 25%;
+  margin-right: 25%;
+}
+
 .greyscale {
   color: rgb(75, 75, 75) !important;
 }
@@ -30,7 +51,8 @@ body {
   font-size: 0.9rem;
   letter-spacing: 0.05rem;
   padding: 0.75rem 1rem;
-  border-radius: 2rem;
+  line-height: 2.5rem !important;
+  border-radius: 2rem !important;
 }
 
 .form-label-group {
