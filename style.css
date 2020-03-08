@@ -16,11 +16,6 @@ body {
   color: rgb(75, 75, 75) !important;
 }
 
-.login,
-.image {
-  min-height: 100vh;
-}
-
 .bg-image {
   background-image: url('https://source.unsplash.com/WEQbe2jBg40/600x1200');
   background-size: cover;
@@ -104,12 +99,22 @@ body {
     margin-right: 25%;
     margin-left: 25%; 
   }
+
+  .login,
+  .image {
+    min-height: 100vh;
+  }
 }
 
 @media (orientation: portrait) {
   .box-size {
     margin-left: auto;
     margin-right: auto;
+  }
+
+  .login,
+  .image {
+    min-height: 75vh;
   }
 }
 
