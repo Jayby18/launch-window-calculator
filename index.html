@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <title>Launch Window Calculator</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+		<script>
+		    function toDeg (radians) {
+		        return (radians * (180 / Math.PI))
+		    }
+		    
+		    function calcComplex () {
+    		    var r1 = 1.000
+    		    var r2 = 1.524
+    		    var GM = 1.327124 * (10 ** 20)
+    		    
+    		    var atx = (r1 + r2) / 2
+    		    var atxMeters = atx * 149.597870 * (10 ** 9)
+    		    console.log(atxMeters)
+    		    
+    		    var e = 1 - (r1 / atx)
+    		    var v = Math.acos((atx * (1 - e ** 2) / r2 - 1) / e)
+    		    var v2 = Math.acos((1.3 * (1 - 0.230769 ** 2) / r2 - 1) / 0.230769)
+    		    
+    		    var v_deg = v * (180 / Math.PI)
+    		    var v2_deg = v2 * (180 / Math.PI)
+    		    
+    		    var E = Math.acos((e + Math.cos(v)) / (1 + e * Math.cos(v)))
+    		    console.log(E)
+    		    var E2 = Math.acos((e + Math.cos(v2)) / (1 + e * Math.cos(v2)))
+    		    console.log(E2)
+    		    
+    		    console.log("")
+    		    console.log("Sine(E)=" + Math.sin(E))
+    		    console.log("Sine(E)=" + Math.sin(toDeg(E)))
+    		    console.log("")
+    		    
+    		    var TOF = E - e * Math.sin(E) * Math.sqrt((atxMeters ** 3) / GM)
+    		    console.log(TOF)
+    		    var TOF2 = E2 - e * Math.sin(E2) * Math.sqrt(((1.3 * 149.597870 * (10 ** 9)) ** 3) / GM)
+    		    console.log(TOF2)
+    		    
+    		    phaseAngle = 180 * (1 - (((r1 + r2) / (2 * r2)) ** 1.5))
+    		    console.log(phaseAngle)
+    		    
+    		    document.getElementById("js_output").innerHTML = phaseAngle
+		    }
+        </script>
+        <script src="index.js"></script>
+
+        <!-- BOOTSTRAP REQUIREMENTS -->
+        <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.js"></script>
+	</head>
+	<body>
+        <center>
+        <div class="container-fluid">
+        <div class="row no-gutter">
+            <div class="col-md box-size">
+            <div class="login d-flex align-items-center py-5">
+                <div class="container">
+                <div class="row">
+                    <div class="col-md-9 col-lg-8 mx-auto">
+                    <h3 class="login-heading mb-4" id="js_output">Calculate phase angle</h3>
+                    <!-- <form action=""> -->
+                        <div class="form-label-group">
+                        <input type="text" id="inputRadius1" class="form-control" placeholder="Radius of parking orbit" onchange="handleInputChange()" oninput="handleInputChange()" required autofocus>
+                        <label for="inputRadius1">Radius of parking orbit (AU)</label>
+                        </div>
+
+                        <div class="form-label-group">
+                        <input type="text" id="inputRadius2" class="form-control" placeholder="Radius of destination orbit" onchange="handleInputChange()" oninput="handleInputChange()" required>
+                        <label for="inputRadius2">Radius of destination orbit (AU)</label>
+                        </div>
+
+                        <div class="form-label-group">
+                        <input type="text" id="inputTransferOrbit" class="form-control greyscale" placeholder="Semi-major axis of transfer orbit" onchange="handleInputChange()">
+                        <label for="inputTransferOrbit" class="greyscale">Semi-major axis of transfer orbit (AU) *</label>
+                        </div>
+
+                        <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" onclick="calcForm()">Calculate!</button>
+                        <div class="text-center">
+                        <p class="small">* = optional</p>
+                        <!-- <a class="small" href="#">Forgot password?</a></div> -->
+                    <!-- </form> -->
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+        </center>
+	</body>
+</html>
