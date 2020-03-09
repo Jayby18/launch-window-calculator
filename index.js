@@ -97,6 +97,14 @@ function calcForm(r1, r2, atx) {
     } else {
         document.getElementById("tof-text").innerHTML = ""
     }
+    
+    var deltaV = deltaVelocity(r1, r2, atx)
+    console.log("dV= " + deltaV)
+    if (!isNaN(deltaV)) {
+        document.getElementById("dv-text").innerHTML = "dV: " + deltaV + "m/s"
+    } else {
+        document.getElementById("dv-text").innerHTML = ""
+    }
 
     // Calculate phase angle using simple formula from KSP forum
     phaseAngle = angleTraversed * (1 - ((r1 + r2) / (2 * r2)) ** 1.5)
