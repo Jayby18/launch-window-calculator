@@ -42,6 +42,8 @@ const GM = 1.327124 * (10 ** 20)
 const aVelMars = 0.5240
 
 function deltaVelocity(ra, rb, atx) {
+    ra = ra * 149.597870 * (10 ** 9)
+    rb = rb * 149.597870 * (10 ** 9)
     let velInitA = Math.sqrt(GM / ra)
     let velFinalB = Math.sqrt(GM / rb)
     let deltaVa = Math.sqrt(GM * (2 / ra - 1 / atx)) - velInitA
